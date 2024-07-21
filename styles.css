@@ -1,0 +1,29 @@
+body {
+	font-family: monospace, monospace;
+	margin: 20px;
+}
+
+h2 {
+	margin-bottom: 0px;
+	text-align: center;
+}
+
+nav ul {
+	list-style-type: none;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+}
+
+nav ul li {
+	margin: 0 10px;
+}
+
+input[type = 'text'] {
+	appearance: textfield;
+	font-family: monospace, monospace;
+}
+
+select, button {
+	font-family: inherit;
+}

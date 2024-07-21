@@ -1,0 +1,19 @@
+select, option {
+	color: #000000;
+	font-style: normal;
+}
+.placeholder {
+	color: #6d6d6d;
+	font-style: italic;
+}
+option[disabled] {
+	color: #6d6d6d;
+}
+input::placeholder {
+	font-style: italic;
+}
+
+textarea[readonly] {
+	resize: none;
+	tab-size: 4;
+}

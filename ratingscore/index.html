@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="../styles.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h2>vivid/stasis stuff</h2>
+	<nav>
+		<ul>
+			<li><a href="./index.html">ratingscore calculator</a></li>
+			<b>-</b>
+			<li><a href="../songdata/index.html">wiki SongData generator</a></li>
+		</ul>
+	</nav>
+	<hr>
+	<div style="text-align:center">
+		<div style="text-align:left; width:250px; margin:0 auto">
+			chart constant:
+			<input type="text" id="input-cc" name="cc" style="width:4ch" maxlength="4">
+			<br>
+			score:
+			<input type="text" id="input-score" name="score" style="width:9ch" maxlength="7">
+			<br>
+			<div id="cleartype">
+				clear:
+				<label><input type="radio" name="clear" value="none" checked>(none)</label>
+				<label><input type="radio" name="clear" value="FC">FC</label>
+				<label><input type="radio" name="clear" value="AC">AC</label>
+			</div>
+
+			<br>
+			<span id="ratingdisplay" style="visibility:hidden;">ratingscore: <strong><code id="ratingscore"></code></strong> <code id="ratingscore_raw"></code></span>
+
+			<script src="main.js"></script>
+		</div>
+	</div>
+</body>
+</html>
