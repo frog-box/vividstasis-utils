@@ -6,6 +6,10 @@ select, option {
 	color: #6d6d6d;
 	font-style: italic;
 }
+/* .fill {
+	min-width: 0px;
+	width: 100%;
+} */
 option[disabled] {
 	color: #6d6d6d;
 }
@@ -16,4 +20,24 @@ input::placeholder {
 textarea[readonly] {
 	resize: none;
 	tab-size: 4;
+}
+
+.flexbox {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+.image-item {
+	display: flex;
+	flex-wrap: wrap;
+	width: 75%;
+	margin-bottom: 2px;
+}
+.image-item * {
+	margin-right: 5px;
+}
+
+td input {
+	width: 90%;
 }

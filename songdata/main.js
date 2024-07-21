@@ -17,7 +17,7 @@ function toggle_shop(input) {
 	var shop_price = document.getElementById("shop-price");
 	if (input.value === "SHOP") {
 		shop_price.style.display = "inline-block";
-		resize(shop_price);
+		// resize(shop_price);
 	} else {
 		shop_price.style.display = "none";
 		shop_price.value = "";
@@ -27,25 +27,26 @@ function toggle_shop(input) {
 function addImage(first_image) {
 	var container = document.createElement("div");
 	container.classList.add("image-item");
+	// container.classList.add("flexbox");
 
 	var children = [
 		{
 			type: "text",
-			class: "image-ver expand",
+			class: "image-ver",// expand",
 			placeholder: "ver",
-			"default-width": 3
+			// "default-width": 3
 		},
 		{
 			type: "text",
-			class: "image-path expand",
+			class: "image-path",// expand",
 			placeholder: "image",
-			"default-width": 9
+			// "default-width": 9
 		},
 		{
 			type: "text",
-			class: "image-illust expand",
+			class: "image-illust",// expand",
 			placeholder: "illust",
-			"default-width": 6
+			// "default-width": 6
 		}
 	];
 	if (first_image)
@@ -137,7 +138,7 @@ function update_output(out) {
 			length = '${"length"}',\n\t\t\t`;
 	
 	if (images.length === 1)
-		metadata += get`illustrator = '${"illust"}',`;
+		metadata += get`illustrator = '${"illust"}',\n\t\t\t`;
 	else
 	{
 		metadata += 'illustrator = [';
