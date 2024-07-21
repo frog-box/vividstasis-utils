@@ -46,11 +46,18 @@
 
 			<div style="padding-left:4ch">
 				<input type="text" id="artist" placeholder="artist" class="expand" default-width="6">
-				<input type="text" id="illust" placeholder="illust" class="expand" default-width="6">
 				<input type="text" id="bpm" placeholder="bpm" class="expand" default-width="3">
 				<input type="text" id="length" placeholder="length" class="expand" default-width="6">
 				<input type="text" id="ver" placeholder="ver" class="expand" default-width="3">
 			</div>
+			<div style="padding-left: 4ch">
+				<span>Images</span>
+				<button id="image-add" onclick="addImage(false)">+</button>
+				<button id="image-remove" onclick="removeImage()" disabled>-</button>
+				<br />
+				<div id="image-list"></div>
+			</div>
+			<br />
 			<div style="padding-left:1ch" id="op-stats">
 				OP <input type="text" id="op-cc" placeholder="cc" class="expand" default-width="2">
 				<input type="text" id="op-charter" placeholder="charter" class="expand" default-width="8">
