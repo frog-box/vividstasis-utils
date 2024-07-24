@@ -17,82 +17,110 @@
 		</ul>
 	</nav>
 	<hr>
-	<div style="text-align:center">
-		<div id="data" style="text-align:left; width:440px; margin:0 auto; line-height: 24px; white-space: nowrap;">
-			<input id="song" type="text" placeholder="song name" class="expand" default-width="9">
-			<select id="pack" onchange="this.classList.remove('placeholder');" class="placeholder">
-				<option value="" disabled selected style="display: none;">pack</option>
-				<option value="single">single</option>
-				<option value="soundscan">soundscan</option>
-				<option value="chapter0">chapter0</option>
-				<option value="chapter1">chapter1</option>
-				<option value="chapter2">chapter2</option>
-				<option value="chapter3">chapter3</option>
-				<option value="chapter4">chapter4</option>
-				<option value="finallanding">finalland</option>
-				<option value="shatter" disabled>shatter</option>
-			</select>
-			<select id="unlock" onchange="this.classList.remove('placeholder'); toggle_shop(this);" class="placeholder">
-				<option value="" disabled selected style="display: none;">unlock</option>
-				<option value="NONE">NONE</option>
-				<option value="SHOP">SHOP</option>
-				<option value="NODE">NODE</option>
-				<option value="BSPACE">BSPACE</option>
-				<option value="SSCAN">SSCAN</option>
-				<option value="OTHER">OTHER</option>
-			</select>
-			<input type="text" placeholder="P" class="expand" default-width="3" id="shop-price" style="display:none;">
-			<input id="alt-title" type="text" placeholder="alt title" class="expand" default-width="9">
+	<div style="width: 60%; margin: auto;">
+		<div id="data" style="line-height: 24px; white-space: nowrap;">
+			<div class="flexbox">
+				<input id="song" type="text" style="grid-column: 1; grid-row: 1;" placeholder="song name">
+				<select id="pack" style="grid-column: 2; grid-row: 1;" onchange="this.classList.remove('placeholder');" class="placeholder">
+					<option value="" disabled selected style="display: none;">pack</option>
+					<option value="single">single</option>
+					<option value="soundscan">soundscan</option>
+					<option value="chapter0">chapter0</option>
+					<option value="chapter1">chapter1</option>
+					<option value="chapter2">chapter2</option>
+					<option value="chapter3">chapter3</option>
+					<option value="chapter4">chapter4</option>
+					<option value="finallanding">finalland</option>
+					<option value="shatter" disabled>shatter</option>
+				</select>
+				<select id="unlock" onchange="this.classList.remove('placeholder'); toggle_shop(this);" class="placeholder" style="grid-column: 3; grid-row: 1;">
+					<option value="" disabled selected style="display: none;">unlock</option>
+					<option value="NONE">NONE</option>
+					<option value="SHOP">SHOP</option>
+					<option value="NODE">NODE</option>
+					<option value="BSPACE">BSPACE</option>
+					<option value="SSCAN">SSCAN</option>
+					<option value="OTHER">OTHER</option>
+				</select>
+				<input type="text" placeholder="P" id="shop-price" style="display:none; grid-column: 3; grid-row: 2;">
+				<input id="alt-title" type="text" style="grid-column: 4; grid-row: 1;" placeholder="alt title">
+				<input type="text" style="grid-column: 5; grid-row: 1;" id="artist" placeholder="artist">
+				<input type="text" style="grid-column: 6; grid-row: 1;" id="bpm" placeholder="bpm">
+				<input type="text" style="grid-column: 7; grid-row: 1;" id="length" placeholder="length">
+				<input type="text" style="grid-column: 8; grid-row: 1;" id="ver" placeholder="ver">
+			</div>
+			<br />
 
-			<div style="padding-left:4ch">
-				<input type="text" id="artist" placeholder="artist" class="expand" default-width="6">
-				<input type="text" id="illust" placeholder="illust" class="expand" default-width="6">
-				<input type="text" id="bpm" placeholder="bpm" class="expand" default-width="3">
-				<input type="text" id="length" placeholder="length" class="expand" default-width="6">
-				<input type="text" id="ver" placeholder="ver" class="expand" default-width="3">
+			<div>
+				<span>Images</span>
+				<button id="image-add" onclick="addImage(false)">+</button>
+				<button id="image-remove" onclick="removeImage()">-</button>
+				<br />
+				<div id="image-list" style="padding-left: 4ch"></div>
 			</div>
-			<div style="padding-left:1ch" id="op-stats">
-				OP <input type="text" id="op-cc" placeholder="cc" class="expand" default-width="2">
-				<input type="text" id="op-charter" placeholder="charter" class="expand" default-width="8">
-				<input type="text" id="op-notes" placeholder="notes" class="expand" default-width="5">
-				<input type="text" id="op-chip" placeholder="chip" class="expand" default-width="4">
-				<input type="text" id="op-tech" placeholder="tech" class="expand" default-width="4">
-				<input type="text" id="op-strm" placeholder="strm" class="expand" default-width="4">
-				<input type="text" id="op-chrd" placeholder="chrd" class="expand" default-width="4">
-				<input type="text" id="op-brst" placeholder="brst" class="expand" default-width="4">
-			</div>
-			<div style="padding-left:1ch" id="md-stats">
-				MD <input type="text" id="md-cc" placeholder="cc" class="expand" default-width="2">
-				<input type="text" id="md-charter" placeholder="charter" class="expand" default-width="8">
-				<input type="text" id="md-notes" placeholder="notes" class="expand" default-width="5">
-				<input type="text" id="md-chip" placeholder="chip" class="expand" default-width="4">
-				<input type="text" id="md-tech" placeholder="tech" class="expand" default-width="4">
-				<input type="text" id="md-strm" placeholder="strm" class="expand" default-width="4">
-				<input type="text" id="md-chrd" placeholder="chrd" class="expand" default-width="4">
-				<input type="text" id="md-brst" placeholder="brst" class="expand" default-width="4">
-			</div>
-			<div style="padding-left:1ch" id="fn-stats">
-				FN <input type="text" id="fn-cc" placeholder="cc" class="expand" default-width="2">
-				<input type="text" id="fn-charter" placeholder="charter" class="expand" default-width="8">
-				<input type="text" id="fn-notes" placeholder="notes" class="expand" default-width="5">
-				<input type="text" id="fn-chip" placeholder="chip" class="expand" default-width="4">
-				<input type="text" id="fn-tech" placeholder="tech" class="expand" default-width="4">
-				<input type="text" id="fn-strm" placeholder="strm" class="expand" default-width="4">
-				<input type="text" id="fn-chrd" placeholder="chrd" class="expand" default-width="4">
-				<input type="text" id="fn-brst" placeholder="brst" class="expand" default-width="4">
-			</div>
-			<div style="padding-left:1ch" id="en-stats">
-				<span id="en-text">EN</span> <input type="text" id="en-cc" placeholder="cc" class="expand" default-width="2">
-				<input type="text" id="en-charter" placeholder="charter" class="expand" default-width="8">
-				<input type="text" id="en-notes" placeholder="notes" class="expand" default-width="5">
-				<input type="text" id="en-chip" placeholder="chip" class="expand" default-width="4">
-				<input type="text" id="en-tech" placeholder="tech" class="expand" default-width="4">
-				<input type="text" id="en-strm" placeholder="strm" class="expand" default-width="4">
-				<input type="text" id="en-chrd" placeholder="chrd" class="expand" default-width="4">
-				<input type="text" id="en-brst" placeholder="brst" class="expand" default-width="4">
-				<input type="text" id="en-ver" placeholder="ver" class="expand" default-width="4">
-				<input id="en-toggle" type="checkbox" onclick="toggle_en(this)">
-			</div>
+			<br />
+
+			<table>
+				<tbody>
+					<tr>
+						<td>OP</td>
+						<td><input type="text" id="op-cc" placeholder="cc"></td>
+						<td><input type="text" id="op-charter" placeholder="charter"></td>
+						<td><input type="text" id="op-notes" placeholder="notes"></td>
+						<td><input type="text" id="op-chip" placeholder="chip"></td>
+						<td><input type="text" id="op-tech" placeholder="tech"></td>
+						<td><input type="text" id="op-strm" placeholder="strm"></td>
+						<td><input type="text" id="op-chrd" placeholder="chrd"></td>
+						<td><input type="text" id="op-brst" placeholder="brst"></td>
+					</tr>
+					<tr>
+						<td>MD</td>
+						<td><input type="text" id="md-cc" placeholder="cc"></td>
+						<td><input type="text" id="md-charter" placeholder="charter"></td>
+						<td><input type="text" id="md-notes" placeholder="notes"></td>
+						<td><input type="text" id="md-chip" placeholder="chip"></td>
+						<td><input type="text" id="md-tech" placeholder="tech"></td>
+						<td><input type="text" id="md-strm" placeholder="strm"></td>
+						<td><input type="text" id="md-chrd" placeholder="chrd"></td>
+						<td><input type="text" id="md-brst" placeholder="brst"></td>
+					</tr>
+					<tr>
+						<td>FN</td>
+						<td><input type="text" id="fn-cc" placeholder="cc"></td>
+						<td><input type="text" id="fn-charter" placeholder="charter"></td>
+						<td><input type="text" id="fn-notes" placeholder="notes"></td>
+						<td><input type="text" id="fn-chip" placeholder="chip"></td>
+						<td><input type="text" id="fn-tech" placeholder="tech"></td>
+						<td><input type="text" id="fn-strm" placeholder="strm"></td>
+						<td><input type="text" id="fn-chrd" placeholder="chrd"></td>
+						<td><input type="text" id="fn-brst" placeholder="brst"></td>
+					</tr>
+					<tr>
+						<td>FN</td>
+						<td><input type="text" id="fn-cc" placeholder="cc"></td>
+						<td><input type="text" id="fn-charter" placeholder="charter"></td>
+						<td><input type="text" id="fn-notes" placeholder="notes"></td>
+						<td><input type="text" id="fn-chip" placeholder="chip"></td>
+						<td><input type="text" id="fn-tech" placeholder="tech"></td>
+						<td><input type="text" id="fn-strm" placeholder="strm"></td>
+						<td><input type="text" id="fn-chrd" placeholder="chrd"></td>
+						<td><input type="text" id="fn-brst" placeholder="brst"></td>
+					</tr>
+					<tr>
+						<td>EN</td>
+						<td><input type="text" id="en-cc" placeholder="cc"></td>
+						<td><input type="text" id="en-charter" placeholder="charter"></td>
+						<td><input type="text" id="en-notes" placeholder="notes"></td>
+						<td><input type="text" id="en-chip" placeholder="chip"></td>
+						<td><input type="text" id="en-tech" placeholder="tech"></td>
+						<td><input type="text" id="en-strm" placeholder="strm"></td>
+						<td><input type="text" id="en-chrd" placeholder="chrd"></td>
+						<td><input type="text" id="en-brst" placeholder="brst"></td>
+						<td><input type="text" id="en-ver" placeholder="ver"></td>
+						<td><input type="checkbox" id="en-toggle" onclick="toggle_en(this)"></td>
+					</tr>
+				</tbody>
+			</table>
 
 			<br><br>
 			<button id="copy">Copy</button>
@@ -100,7 +128,7 @@
 			<script src="main.js"></script>
 		</div>
 		<div id="output">
-			<textarea style="width:550px; height:240px;" readonly id="output-area"></textarea>
+			<textarea style="width:100%; height:240px;" readonly id="output-area"></textarea>
 
 		</div>
 	</div>

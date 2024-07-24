@@ -17,11 +17,68 @@ function toggle_shop(input) {
 	var shop_price = document.getElementById("shop-price");
 	if (input.value === "SHOP") {
 		shop_price.style.display = "inline-block";
-		resize(shop_price);
+		// resize(shop_price);
 	} else {
 		shop_price.style.display = "none";
 		shop_price.value = "";
 	}
+}
+
+function addImage(first_image) {
+	var container = document.createElement("div");
+	container.classList.add("image-item");
+	// container.classList.add("flexbox");
+
+	var children = [
+		{
+			type: "text",
+			class: "image-ver",// expand",
+			placeholder: "ver",
+			// "default-width": 3
+		},
+		{
+			type: "text",
+			class: "image-path",// expand",
+			placeholder: "image",
+			// "default-width": 9
+		},
+		{
+			type: "text",
+			class: "image-illust",// expand",
+			placeholder: "illust",
+			// "default-width": 6
+		}
+	];
+	if (first_image)
+	{
+		children[1]["id"] = "image";
+		children[2]["id"] = "illust";
+	}
+
+	children.forEach((child) => {
+		var element = document.createElement("input");
+		Object.keys(child).forEach((key) => {
+			element.setAttribute(key, child[key]);
+		});
+		if (!first_image)
+		{
+			element.style.width = element.getAttribute("default-width")+"ch";
+			element.addEventListener("input", () => resize(element));
+		}
+		container.appendChild(element);
+		container.append("\n");
+	});
+	document.getElementById("image-list").appendChild(container);
+	if (!first_image)
+		document.getElementById("image-remove").removeAttribute("disabled");
+}
+addImage(true);
+
+function removeImage() {
+	var list = document.getElementById("image-list");
+	list.removeChild(list.lastChild);
+	if (list.children.length <= 1)
+		document.getElementById("image-remove").setAttribute("disabled", "");
 }
 
 function resize(input) {
@@ -31,7 +88,10 @@ function resize(input) {
 document.querySelectorAll('.expand').forEach(input => {
 	input.style.width = input.getAttribute("default-width")+"ch";
 	input.addEventListener("input", () => resize(input));
-})
+});
+
+// For some reason, doing this in html causes the state to not reset when refreshing, at least on firefox, so I'm doing it here.
+document.getElementById('image-remove').setAttribute('disabled', '');
 
 function get(strings, ...values) {
 	return strings.reduce((result, str, i) => {
@@ -42,17 +102,53 @@ function get(strings, ...values) {
 	}, '');
 }
 
+function escape_chars(str) {
+	var escapes = [
+		['\\', '\\\\'],
+		['\'', '\\\'']
+	];
+	var out = str;
+	escapes.forEach((escape) => {
+		out = out.replace(escape[0], escape[1]);
+	});
+	return out;
+}
+
 function update_output(out) {
+	var images = document.getElementById("image-list").children;
 	var header = get`\t\t['${"song"}'] = {\n\t\t\t`;
 	var title = "";
-	if (get`${"alt-title"}` !== "") {
-		title = get`title = '${"alt-title"}',\n\t\t\t`
+	if (get`${"alt-title"}` !== "")
+		title = get`title = '${"alt-title"}',\n\t\t\t`;
+	if (images.length > 1)
+	{
+		title += 'image = [';
+		for (var i = 0; i < images.length; i++)
+		{
+			var image_element = images[i];
+			title += `['${image_element.getElementsByClassName('image-ver')[0].value}', '${image_element.getElementsByClassName('image-path')[0].value}']`;
+		}
+		title += '],\n\t\t\t';
 	}
+	else if (get`${"image"}` !== "")
+		title += get`image = '${"image"}',\n\t\t\t`;
 	var metadata = get`pack = '${"pack"}',
 			artist = '${"artist"}',
 			bpm = ${"bpm"},
-			length = '${"length"}',
-			illustrator = '${"illust"}',\n\t\t\t`;
+			length = '${"length"}',\n\t\t\t`;
+	
+	if (images.length === 1)
+		metadata += get`illustrator = '${"illust"}',\n\t\t\t`;
+	else
+	{
+		metadata += 'illustrator = [';
+		for (var i = 0; i < images.length; i++)
+		{
+			var image_element = images[i];
+			metadata += `['${image_element.getElementsByClassName('image-ver')[0].value}', '${image_element.getElementsByClassName('image-illust')[0].value}']`;
+		}
+		metadata += '\n\t\t\t';
+	}
 
 	var main_diffs = get`opening = {${"op-cc"}, '${"op-charter"}', ${"op-notes"}, ${"op-chip"}, ${"op-tech"}, ${"op-strm"}, ${"op-chrd"}, ${"op-brst"}},
 			middle = {${"md-cc"}, '${"md-charter"}', ${"md-notes"}, ${"md-chip"}, ${"md-tech"}, ${"md-strm"}, ${"md-chrd"}, ${"md-brst"}},
